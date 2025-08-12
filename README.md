@@ -33,8 +33,8 @@ Eğer `h * f > φ` ise fotoelektrik olay gerçekleşir.
 ## 📸 Ekran Görüntüleri
 Proje arayüzünden örnekler:
 
-![Ana Sayfa](./screenshots/home.png)
+![Ana Sayfa](./public/screenshots/home.png)
 
-![Sonuçlar Tablosu](./screenshots/results.png)
+![Sonuçlar Tablosu](./public/screenshots/results.png)
 
 
