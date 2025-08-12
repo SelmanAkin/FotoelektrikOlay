@@ -1,0 +1,37 @@
+<div style="margin-bottom: 50px; margin-top: -600px;">
+  <h1 style="font-size: 60px; text-align: center; color: white;">🔬 Fotoelektrik Etki Sonuçları</h1>
+
+  <div style="text-align: center; margin: 30px 0;">
+    <%= link_to "➕ Yeni Hesaplama", new_photoelectric_effect_path,
+                class: "button",
+                style: "padding: 20px 40px; font-size: 15px; background-color: #4CAF50; color: white; text-decoration: none; border-radius: 8px;" %>
+  </div>
+
+  <table style="width: 100%; border-collapse: collapse; font-size: 20px; background-color: white; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+    <thead>
+      <tr style="background-color: #f2f2f2;">
+        <th style="padding: 20px; border: 2px solid #ddd;">Frekans (Hz)</th>
+        <th style="padding: 20px; border: 2px solid #ddd;">Eşik Enerji (eV)</th>
+        <th style="padding: 20px; border: 2px solid #ddd;">Hesaplanan Enerji (eV)</th>
+        <th style="padding: 20px; border: 2px solid #ddd;">Elektron Koptu mu?</th>
+        <th style="padding: 20px; border: 2px solid #ddd;">İşlem</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @photoelectric_effects.each do |effect| %>
+        <tr>
+          <td style="padding: 20px; border: 2px solid #ddd;"><%= to_scientific_notation(effect.frequency) %> Hz</td>
+          <td style="padding: 20px; border: 2px solid #ddd;"><%= number_with_precision(effect.work_function, precision: 2) %> eV</td>
+          <td style="padding: 20px; border: 2px solid #ddd;"><%= number_with_precision(effect.energy) %> eV</td>
+          <td style="padding: 20px; border: 2px solid #ddd;"><%= effect.emits ? "✅ Evet" : "❌ Hayır" %></td>
+          <td style="padding: 20px; border: 2px solid #ddd;">
+            <%= button_to "🗑️ Sil", photoelectric_effect_path(effect),
+                          method: :delete,
+                          data: { confirm: "Bu kaydı silmek istediğinize emin misiniz?" },
+                          style: "padding: 12px 24px; font-size: 20px; background-color: #f44336; color: white; border: none; border-radius: 6px; cursor: pointer;" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

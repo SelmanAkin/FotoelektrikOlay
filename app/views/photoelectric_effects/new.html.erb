@@ -1,0 +1,92 @@
+<%= form_with model: @photoelectric_effect, url: photoelectric_effects_path, local: true do |form| %>
+  <div style="margin-bottom: 20px;">
+    <%= form.label :frequency, "📶 Işık Frekansı (Hz):", style: "color: white; font-size: 40px;" %><br>
+
+    <% frequencies = {
+      "Radyo Dalgaları (~10⁶ Hz)"      => 1.0e6,
+      "Mikrodalgalar (~10¹⁰ Hz)"       => 1.0e10,
+      "Kızılötesi (~10¹³ Hz)"          => 1.0e13,
+      "Görünür Işık (~5×10¹⁴ Hz)"      => 5.0e14,
+      "Morötesi (~10¹⁶ Hz)"            => 1.0e16,
+      "X Işınları (~10¹⁸ Hz)"          => 1.0e18,
+      "Gama Işınları (~10²⁰ Hz)"       => 1.0e20
+    } %>
+
+    <%= form.select :frequency, frequencies.map { |label, val| ["#{label}", val] }, 
+                    { prompt: "Frekans Türünü Seçin" }, 
+                    class: "dropdown-button", required: true %>
+  </div>
+
+  <div style="margin-bottom: 20px;">
+    <%= form.label :work_function, "🔩 Metalin Eşik Enerjisi (eV):", style: "color: white; font-size: 40px;" %><br>
+
+    <% metals = {
+      "Sezyum (Cs)"   => 2.14,
+      "Sodyum (Na)"   => 2.28,
+      "Potasyum (K)"  => 2.30,
+      "Lityum (Li)"   => 2.39,
+      "Kalsiyum (Ca)" => 2.87,
+      "Alüminyum (Al)"=> 4.28,
+      "Çinko (Zn)"    => 4.31,
+      "Bakır (Cu)"    => 4.70,
+      "Gümüş (Ag)"    => 4.73,
+      "Nikel (Ni)"    => 5.01,
+      "Platin (Pt)"   => 6.35
+    } %>
+
+    <%= form.select :work_function, metals.map { |metal, energy| ["#{metal} - #{energy} eV", energy] }, 
+                    { prompt: "Metal Seçin" }, 
+                    class: "dropdown-button", required: true %>
+  </div>
+
+  <div>
+    <%= form.submit "⚡ Hesapla", 
+                    class: "submit-button", 
+                    style: "padding: 10px 20px; background-color: #2196F3; color: white; border: none; border-radius: 5px;" %>
+  </div>
+<% end %>
+
+<div style="margin-top: 40px;">
+  <h1 style="color: white; font-size: 90px; text-align: left; margin-left: 150px;">📡 Fotoelektrik Olay</h1>
+
+  <div style="width: 100%; overflow-x: auto; margin-top: 20px;">
+    <div class="scene" data-controller="animation">
+
+      <img src="/assets/Elektromanyetik Spektrum.png" alt="Katot Işınları Diyagramı" class="resim">
+
+      <div class="wall"></div>
+      <div class="wall_2"></div>
+
+      <div class="lantern-stand"></div>
+      <div class="lantern-bar top-bar"></div>
+      <div class="lantern-bar middle-bar"></div>
+
+      <div class="battery">
+        <div class="negative">−</div>
+        <div class="energy"></div>
+        <div class="positive">+</div>
+        <div class="logo"></div>
+      </div>
+
+      <div class="lantern">
+        <div class="lantern-body"></div>
+        <div class="lantern-light" data-animation-target="light"></div>
+      </div>
+
+      <div class="tube">
+        <div class="electrode left"></div>
+        <div class="electrode right"></div>
+      </div>
+
+      <div class="wire left"></div>
+      <div class="wire right"></div>
+
+      <input type="range" id="wavelength" min="380" max="750" value="500" 
+             data-animation-target="colorPicker" 
+             data-action="input->animation#updateLightColor"
+             class="color-slider">
+
+      <button data-action="click->animation#stopAnimation" class="stop-btn">Işığı Kapat</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "chart.js": "^4.4.9",
+    "stimulus": "^3.2.2"
+  }
+}
